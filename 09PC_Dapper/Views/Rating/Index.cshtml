@@ -1,0 +1,108 @@
+﻿@model List<_09PC_Dapper.Dtos.RatingDtos.ResultRatingDto>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    int count = 0;
+}
+
+<div class="page-header">
+    <div class="row">
+        <div class="col-md-6 col-sm-12">
+            <div class="title">
+                <h4>Puanlama Listesi</h4>
+            </div>
+            <nav aria-label="breadcrumb" role="navigation">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item">
+                        <a href="/Dashboard/Index">Dashboard</a>
+                    </li>
+                    <li class="breadcrumb-item active" aria-current="page">
+                        Puanlama Listesi
+                    </li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+</div>
+
+<div class="card-box mb-30">
+    <div class="pd-20">
+        <div class="row align-items-center">
+            <div class="col-md-6 col-sm-12">
+                <h4 class="text-blue h4 mb-0">Puanlamalar</h4>
+            </div>
+            <div class="col-md-6 col-sm-12 text-right">
+                <form method="get" class="form-inline float-right">
+                    <input type="text" name="search" value="@ViewBag.Search" class="form-control mr-2" placeholder="Ara..." />
+                    <select name="pageSize" onchange="this.form.submit()" class="form-control mr-2">
+                        <option value="10" selected="@(ViewBag.PageSize == 10 ? "selected" : null)">10</option>
+                        <option value="25" selected="@(ViewBag.PageSize == 25 ? "selected" : null)">25</option>
+                        <option value="50" selected="@(ViewBag.PageSize == 50 ? "selected" : null)">50</option>
+                        <option value="100" selected="@(ViewBag.PageSize == 100 ? "selected" : null)">100</option>
+                    </select>
+                    <button type="submit" class="btn btn-primary">Uygula</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="pb-20">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>User ID</th>
+                    <th>Book ID</th>
+                    <th>Puan</th>
+                    <th>İşlemler</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    count++;
+                    <tr>
+                        <td>@count</td>
+                        <td>@item.User_ID</td>
+                        <td>@item.ISBN</td>
+                        <td>@item.Book_Rating</td>
+                        <td>
+                            <a class="btn btn-sm btn-info" href="#"><i class="dw dw-eye"></i></a>
+                            <a class="btn btn-sm btn-warning" href="#"><i class="dw dw-edit2"></i></a>
+                            <a class="btn btn-sm btn-danger" href="#"><i class="dw dw-delete-3"></i></a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+    <div class="d-flex justify-content-between align-items-center px-3 pb-3">
+        <span>Sayfa @ViewBag.CurrentPage / @ViewBag.TotalPages</span>
+
+        <nav>
+            <ul class="pagination mb-0">
+                @if (ViewBag.CurrentPage > 1)
+                {
+                    <li class="page-item">
+                        <a class="page-link" href="?page=@(ViewBag.CurrentPage - 1)&pageSize=@ViewBag.PageSize&search=@ViewBag.Search">«</a>
+                    </li>
+                }
+
+                @for (int i = ViewBag.StartPage; i <= ViewBag.EndPage; i++)
+                {
+                    <li class="page-item @(i == ViewBag.CurrentPage ? "active" : "")">
+                        <a class="page-link" href="?page=@i&pageSize=@ViewBag.PageSize&search=@ViewBag.Search">@i</a>
+                    </li>
+                }
+
+                @if (ViewBag.CurrentPage < ViewBag.TotalPages)
+                {
+                    <li class="page-item">
+                        <a class="page-link" href="?page=@(ViewBag.CurrentPage + 1)&pageSize=@ViewBag.PageSize&search=@ViewBag.Search">»</a>
+                    </li>
+                }
+            </ul>
+        </nav>
+    </div>
+</div>

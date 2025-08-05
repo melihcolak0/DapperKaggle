@@ -1,0 +1,17 @@
+﻿@model _09PC_Dapper.Dtos.DepartmentDtos.GetDepartmentByIdDto
+@{
+    Layout = null;
+}
+
+<link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+<div class="container">
+    <form method="post">
+        <br /> <br />
+        <input type="hidden" asp-for="DepartmentId" />
+        <label>Departman Adı</label>
+        <input type="text" asp-for="DepartmentName" class="form-control" />
+        <br />
+        <button class="btn btn-success">Güncelle</button>
+    </form>
+</div>

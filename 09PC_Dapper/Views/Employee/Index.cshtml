@@ -1,0 +1,32 @@
+﻿@model List<_09PC_Dapper.Dtos.EmployeeDtos.ResultEmployeeDto>
+@{
+    Layout = null;
+}
+
+<link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+<div class="container">
+    <br /><br />
+    <table class="table table-bordered">
+        <tr>
+            <th>#</th>
+            <th>Adı</th>
+            <th>Soyadı</th>
+            <th>Maaş</th>
+            <th>Sil</th>
+            <th>Güncelle</th>
+        </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <th>@item.EmployeeId</th>
+                <td>@item.Name</td>
+                <td>@item.Surname</td>
+                <td>@item.Salary</td>
+                <td><a href="/Employee/DeleteEmployee/@item.EmployeeId" class="btn btn-danger">Sil</a></td>
+                <td><a href="/Employee/UpdateEmployee/@item.EmployeeId" class="btn btn-warning">Güncelle</a></td>
+            </tr>
+        }
+    </table>
+    <a href="/Employee/CreateEmployee" class="btn btn-primary">Yeni Çalışan Ekle</a>
+</div>

@@ -1,0 +1,281 @@
+﻿@model _09PC_Dapper.Dtos.DashboardDtos.DashboardStatisticsDto
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<style>
+    .table-plus img {
+        width: 70px;
+        height: 70px;
+        display: inline-block;
+        vertical-align: middle;
+    }
+
+    .year-publisher-cell {
+        display: flex;
+        align-items: center;
+        gap: 10px; /* Görsel ve yazı arasına boşluk */
+        white-space: nowrap; /* Satır kaymasını önler */
+    }
+</style>
+
+
+<div class="page-header">
+    <div class="row">
+        <div class="col-md-6 col-sm-12">
+            <div class="title">
+                <h4>Dashboard</h4>
+            </div>
+            <nav aria-label="breadcrumb" role="navigation">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item active" aria-current="page">
+                        Dashboard
+                    </li>
+                </ol>
+            </nav>
+        </div>
+        <div class="col-md-6 col-sm-12 text-right">
+        </div>
+    </div>
+</div>
+
+
+<div class="row pb-10">
+    <!-- Toplam Kitap Sayısı -->
+    <div class="col-xl-3 col-lg-3 col-md-6 mb-20">
+        <div class="card-box height-100-p widget-style3">
+            <div class="d-flex flex-wrap">
+                <div class="widget-data">
+                    <div class="weight-700 font-18 text-dark">@Model.TotalBookCount</div>
+                    <div class="font-14 text-secondary weight-500">Toplam Kitap</div>
+                </div>
+                <div class="widget-icon">
+                    <div class="icon" data-color="#ff5b5b">
+                        <i class="icon-copy fa fa-book"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- En yüksek puanlı kitap -->
+    <div class="col-xl-3 col-lg-3 col-md-6 mb-20">
+        <div class="card-box widget-style3">
+            <div class="d-flex flex-wrap">
+                <div class="widget-data">
+                    <div class="font-18 text-dark font-weight-bold text-truncate">@Model.MaxRatedBookTitle</div>
+                    <div class="font-14 text-success">En Yüksek Puan: @Model.MaxRating</div>
+                </div>
+
+                <div class="widget-icon">
+                    <div class="icon text-success"><i class="fa fa-star"></i></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- En düşük puanlı kitap -->
+    <div class="col-xl-3 col-lg-3 col-md-6 mb-20">
+        <div class="card-box widget-style3">
+            <div class="d-flex flex-wrap">
+                <div class="widget-data">
+                    <div class="font-18 text-dark font-weight-bold text-truncate">@Model.MinRatedBookTitle</div>
+                    <div class="font-14 text-danger">En Düşük Puan: @Model.MinRating</div>
+                </div>
+                <div class="widget-icon">
+                    <div class="icon text-danger"><i class="fa fa-thumbs-down"></i></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Ortalama kullanıcı yaşı -->
+    <div class="col-xl-3 col-lg-3 col-md-6 mb-20">
+        <div class="card-box widget-style3">
+            <div class="d-flex flex-wrap">
+                <div class="widget-data">
+                    <div class="font-18 text-dark font-weight-bold">@Model.AverageUserAge.ToString("0.0")</div>
+                    <div class="font-14 text-secondary">Ortalama Kullanıcı Yaşı</div>
+                </div>
+                <div class="widget-icon">
+                    <div class="icon text-info"><i class="fa fa-user"></i></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row pb-10 d-flex align-items-stretch">
+    <div class="col-md-8 mb-20 h-100">
+        <div class="card-box height-100-p pd-20 h-100">
+            <div class="d-flex flex-wrap justify-content-between align-items-center pb-0 pb-md-3">
+                <div class="h5 mb-md-0">Değerlendirme Sonuçları Dağılımı</div>
+            </div>
+            <canvas id="ratingChart"></canvas>
+        </div>
+    </div>
+    <div class="col-md-4 mb-20 d-flex flex-column">
+        <div class="card-box min-height-200px pd-20 mb-20 flex-grow-1" data-bgcolor="#455a64">
+            <div class="d-flex justify-content-between pb-20 text-white">
+                <div class="icon h1 text-white">
+                    <i class="fa fa-users" aria-hidden="true"></i>
+                </div>
+                <div class="font-14 text-right">
+                    <div><i class="icon-copy ion-arrow-up-c"></i> %53</div>
+                    <div class="font-12">Kullanıcılar</div>
+                </div>
+            </div>
+            <div class="d-flex justify-content-between align-items-end">
+                <div class="text-white">
+                    <div class="font-14">Toplam Kullanıcı Sayısı</div>
+                    <div class="font-24 weight-500">@Model.TotalUserCount</div>
+                </div>
+                <div class="max-width-150">
+                    <div id="user-chart"></div> <!-- Eğer grafik koyacaksan -->
+                </div>
+            </div>
+        </div>
+
+        <div class="card-box min-height-200px pd-20" data-bgcolor="#265ed7">
+            <div class="d-flex justify-content-between pb-20 text-white">
+                <div class="icon h1 text-white">
+                    <i class="fa fa-book" aria-hidden="true"></i>
+                </div>
+                <div class="font-14 text-right">
+                    <div><i class="icon-copy ion-arrow-down-c"></i> %26</div>
+                    <div class="font-12">Kitaplar</div>
+                </div>
+            </div>
+            <div class="d-flex justify-content-between align-items-end">
+                <div class="text-white">
+                    <div class="font-14">2000 Sonrası Basılan Kitap Sayısı</div>
+                    <div class="font-24 weight-500">@Model.BooksPublishedAfter2000</div>
+                </div>
+                <div class="max-width-150">
+                    <div id="books-after-2000-chart"></div> <!-- Eğer grafik koyacaksan -->
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div class="row pb-10 d-flex align-items-stretch">
+    <div class="col-md-6 mb-20 h-100">
+        <div class="card-box height-100-p pd-20 h-100">
+            <div class="d-flex flex-wrap justify-content-between align-items-center pb-0 pb-md-3">
+                <div class="h5 mb-md-0">Yayın Ev'lerinin Kitap Sayıları</div>
+            </div>
+            <canvas id="booksByPublisherChart"></canvas>
+        </div>
+    </div>
+    <div class="col-md-6 mb-20 d-flex flex-column">
+        <div class="card-box height-100-p pd-20 h-100">
+            <div class="d-flex flex-wrap justify-content-between align-items-center pb-0 pb-md-3">
+                <div class="h5 mb-md-0">Yıllara Göre Kitap Sayısı</div>
+            </div>
+            <canvas id="booksByYearChart"></canvas>
+        </div>
+    </div>
+</div>
+
+<div class="card-box mb-30">
+    <h2 class="h4 pd-20">En Popüler 5 Kitap</h2>
+    <table class="data-table table nowrap">
+        <thead>
+            <tr>
+                <th class="table-plus datatable-nosort">Kitap Görseli</th>
+                <th>Kitap Adı</th>
+                <th>Yazar</th>
+                <th class="year-publisher-cell">Yayın Yılı</th>
+                <th>Yayın Evi</th>
+                <th>Rating</th>
+                <th class="datatable-nosort">İşlem</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.BookTableItems)
+            {
+                <tr>
+                    <td class="table-plus">
+                        <img src="@item.ImageUrl"
+                             width="70"
+                             height="70"
+                             alt="@item.BookTitle" />
+                    </td>
+                    <td>
+                        @(string.IsNullOrEmpty(item.BookTitle) ? "" : (item.BookTitle.Length <= 20 ? item.BookTitle : item.BookTitle.Substring(0, 20) + "..."))
+                    </td>
+                    <td>@item.Author</td>
+                    <td>@item.YearOfPublication</td>
+                    <td>@item.Publisher</td>
+                    <td>@item.Rating</td>
+                    <td>
+                        <div class="dropdown">
+                            <a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle"
+                               href="#" role="button"
+                               data-toggle="dropdown">
+                                <i class="dw dw-more"></i>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
+                                <a class="dropdown-item" href="#"><i class="dw dw-eye"></i> Görüntüle</a>
+                                <a class="dropdown-item" href="#"><i class="dw dw-edit2"></i> Düzenle</a>
+                                <a class="dropdown-item" href="#"><i class="dw dw-delete-3"></i> Sil</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+    const booksByPublisherCtx = document.getElementById('booksByPublisherChart').getContext('2d');
+    const booksByYearCtx = document.getElementById('booksByYearChart').getContext('2d');
+
+    const booksByPublisherChart = new Chart(booksByPublisherCtx, {
+        type: 'bar',
+        data: {
+            labels: @Html.Raw(Json.Serialize(Model.BooksByPublisher.Select(x => x.Label))),
+            datasets: [{
+                label: 'Kitap Sayısı (Yayın Evi)',
+                data: @Html.Raw(Json.Serialize(Model.BooksByPublisher.Select(x => x.Value))),
+            }]
+        }
+    });
+
+    const booksByYearChart = new Chart(booksByYearCtx, {
+        type: 'line',
+        data: {
+            labels: @Html.Raw(Json.Serialize(Model.BooksByYear.Select(x => x.Label))),
+            datasets: [{
+                label: 'Kitap Yayınlanma Sayısı (Yıllara Göre)',
+                data: @Html.Raw(Json.Serialize(Model.BooksByYear.Select(x => x.Value))),
+                fill: false,
+                borderColor: 'rgb(75, 192, 192)',
+                tension: 0.1
+            }]
+        }
+    });
+</script>
+
+<script>
+    var ctx = document.getElementById("ratingChart").getContext("2d");
+    var chart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: @Html.Raw(Json.Serialize(Model.RatingDistribution.Select(x => x.Label))),
+            datasets: [{
+                label: 'Rating Sayısı',
+                data: @Html.Raw(Json.Serialize(Model.RatingDistribution.Select(x => x.Value))),
+                backgroundColor: 'rgba(75, 192, 192, 0.6)'
+            }]
+        }
+    });
+</script>
+
+

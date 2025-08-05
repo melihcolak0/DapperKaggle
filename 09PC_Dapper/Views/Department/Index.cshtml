@@ -1,0 +1,28 @@
+﻿@model List<_09PC_Dapper.Dtos.DepartmentDtos.ResultDepartmentDto>
+@{
+    Layout = null;
+}
+
+<link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+<div class="container">
+    <br /><br />
+    <table class="table table-bordered">
+        <tr>
+            <th>#</th>
+            <th>Departman Adı</th>
+            <th>Sil</th>
+            <th>Güncelle</th>
+        </tr>
+        @foreach(var item in Model)
+        {
+            <tr>
+                <th>@item.DepartmentId</th>
+                <td>@item.DepartmentName</td>
+                <td><a href="/Department/DeleteDepartment/@item.DepartmentId" class="btn btn-danger">Sil</a></td>
+                <td><a href="/Department/UpdateDepartment/@item.DepartmentId" class="btn btn-warning">Güncelle</a></td>
+            </tr>
+        }
+    </table>
+    <a href="/Department/CreateDepartment" class="btn btn-primary">Yeni Departman Ekle</a>
+</div>

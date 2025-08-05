@@ -1,0 +1,45 @@
+﻿@model List<_09PC_Dapper.Dtos.BookDtos.BookWithRatingDto>
+@{
+    ViewData["Title"] = "Index2";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="page-header">
+    <div class="row">
+        <div class="col-md-6 col-sm-12">
+            <div class="title">
+                <h4>Popüler Kitaplar</h4>
+            </div>
+            <nav aria-label="breadcrumb" role="navigation">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item">
+                        <a href="/Dashboard/Index">Dashboard</a>
+                    </li>
+                    <li class="breadcrumb-item active" aria-current="page">
+                        Popüler Kitaplar
+                    </li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    @foreach (var book in Model)
+    {
+        <div class="col-md-4 mb-20">
+            <a href="#" class="card-box d-block mx-auto pd-20 text-secondary" style="max-width: 320px;">
+                <div class="img pb-30" style="height: 300px; display: flex; justify-content: center; align-items: center; overflow: hidden; background: #f5f5f5;">
+                    <img src="@book.ImageUrl" alt="@book.BookTitle" style="max-height: 100%; max-width: 100%; object-fit: contain;" />
+                </div>
+                <div class="content">
+                    <h3 class="h4">@((book.BookTitle.Length <= 30) ? book.BookTitle : book.BookTitle.Substring(0, 30) + "...")</h3>
+                    <p class="mb-1"><strong>Yazar:</strong> @book.Author</p>
+                    <p class="mb-1"><strong>Yayın Yılı:</strong> @book.YearOfPublication</p>
+                    <p class="mb-1"><strong>Yayın Evi:</strong> @book.Publisher</p>
+                    <p><strong>Rating:</strong> @book.Rating</p>
+                </div>
+            </a>
+        </div>
+    }
+</div>
