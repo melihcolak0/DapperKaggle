@@ -79,9 +79,19 @@ Veri Seti Paneli: Burada kullanıcı, kitaplar, popüler kitaplar, kullanıcıla
 
 ## :arrow_forward: Projeden Ekran Görüntüleri
 
----
-
 ### :triangular_flag_on_post: Veri Seti Paneli
 <div align="center">
-  <img src="https://github.com/melihcolak0/ScheduleMVC/blob/1a0d5a0d1b9637fda6f7322cecfcb8ffe23e594d/ss/localhost_44327_Schedule_Index%20(4).png" alt="image alt">
+  <img src="https://github.com/melihcolak0/DapperKaggle/blob/6a8304952247db2c4cdc1baab89bb2740361d757/ss/screencapture-localhost-7039-Dashboard-Index-2025-08-05-22_55_27.png" alt="image alt">
+</div>
+<div align="center">
+  <img src="https://github.com/melihcolak0/DapperKaggle/blob/6a8304952247db2c4cdc1baab89bb2740361d757/ss/screencapture-localhost-7039-Book-Index-2025-08-05-22_56_31.png" alt="image alt">
+</div>
+<div align="center">
+  <img src="https://github.com/melihcolak0/DapperKaggle/blob/6a8304952247db2c4cdc1baab89bb2740361d757/ss/screencapture-localhost-7039-Book-Index2-2025-08-05-22_55_50.png" alt="image alt">
+</div>
+<div align="center">
+  <img src="https://github.com/melihcolak0/DapperKaggle/blob/6a8304952247db2c4cdc1baab89bb2740361d757/ss/screencapture-localhost-7039-User-Index-2025-08-05-22_56_53.png" alt="image alt">
+</div>
+<div align="center">
+  <img src="https://github.com/melihcolak0/DapperKaggle/blob/6a8304952247db2c4cdc1baab89bb2740361d757/ss/screencapture-localhost-7039-Rating-Index-2025-08-05-22_57_38.png" alt="image alt">
 </div>
