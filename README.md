@@ -65,6 +65,7 @@ Veri kümesi üç ayrı tablo içerir:<br>
 ### 🚀 Kullandığım Teknolojiler
 💻 ASP.NET Core Web App (.NET 9.0)<br>
 📐 Tek Katmanlı Yapı (Services-DTOs-)<br>
+🔄 AutoMapper
 💾 Dapper (Micro ORM) <br>
 🗄️ MS SQL Server (Kaggle'dan alınan veri setleri ile yapılandırıldı)<br>
 📊 Chart.js (İstatistiksel grafikler için)<br>
