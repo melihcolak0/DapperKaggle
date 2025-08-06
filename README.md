@@ -19,9 +19,10 @@ Bu projeyi geliştirirken amacım, ASP.NET Core ve Dapper teknolojileriyle moder
 ---
 
 ## 🗃️ Veri Kümesi Hakkında: Books Dataset (Kaggle)
-Bu projede Kaggle’dan alınan "Books Dataset" veri seti kullanılmıştır. Veri kümesi üç ayrı tablo içerir:<br>
+Bu projede Kaggle’dan alınan "Books Dataset" veri seti kullanılmıştır.<br>
 Veri Seti: https://www.kaggle.com/datasets/saurabhbagchi/books-dataset
 
+Veri kümesi üç ayrı tablo içerir:<br>
 ### 📗 Books Tablosu
 
 | Sütun Adı           | Açıklama                         |
@@ -72,7 +73,7 @@ Veri Seti: https://www.kaggle.com/datasets/saurabhbagchi/books-dataset
 
 
 Projede genel anlamda 1 bölüm bulunmaktadır.<br>
-Ana Sayfa: Burada kullanıcı, Takvim Çizelgesi uygulaması ile etkinliklerini düzenleyebilir, Etkinlik ve Kategori entity'lerinin de CRUD işlemlerini yapabilir.<br>
+Veri Seti Paneli: Burada kullanıcı, kitaplar, popüler kitaplar, kullanıcılar ve puanlamaları listeyebilir ve filtreleyebilir. Dashboard bölümünde de tablolar ile ilgili istatistikleri görüntüleyebilir.<br>
 
 ---
 
